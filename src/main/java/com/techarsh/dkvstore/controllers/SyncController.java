@@ -27,12 +27,15 @@ public class SyncController {
 	private Store store;
 
 	@RequestMapping(value = "/sync/{key}")
-	public String set(@PathVariable String key, @RequestParam String val) {
+	public String set(@PathVariable("key") String key, @RequestParam("val") String val) {
 
 		KeyValuePair kvp = new KeyValuePair(key, val);
-		store.put(kvp);
-
-		return "Success";
+		try {
+			store.put(kvp);
+			return "OK";
+		} catch (Exception e){
+			return "Fail";
+		}
 	}
 
 	@RequestMapping(value = "/sync", method = RequestMethod.POST)

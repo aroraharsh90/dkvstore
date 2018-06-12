@@ -24,7 +24,7 @@ public class StoreController {
 	private SyncAllServers syncAllServers;
 
 	@RequestMapping(value = "/get/{key}")
-	public String get(@PathVariable String key) {
+	public String get(@PathVariable("key") String key) {
 		KeyValuePair kvp = store.get(key);
 		if (kvp == null) {
 			return "Key-Value pair doesn't exist";
@@ -34,7 +34,7 @@ public class StoreController {
 	}
 
 	@RequestMapping(value = "/set/{key}")
-	public String set(@PathVariable String key, @RequestParam String val) {
+	public String set(@PathVariable("key") String key, @RequestParam("val") String val) {
 
 		// RestTemplate restTemplate = new RestTemplate();
 		// String res = restTemplate.getForObject("http://localhost:8080/get/abcd",
@@ -44,6 +44,6 @@ public class StoreController {
 
 		syncAllServers.sync(kvp);
 
-		return "Success";
+		return "OK";
 	}
 }
