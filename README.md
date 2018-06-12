@@ -1,5 +1,5 @@
 # Distributed Key Value Store
-A simple distributed <String, String> key value store created with Spring Boot which can run more than 1 different process to replicate data between them.
+A simple distributed <String, String> key value store created with Spring Boot which can run across 2 or more processes/systems connected over internet to replicate data between them.
 
 ## How to Run?
 1. Clone the Repository
@@ -8,4 +8,13 @@ A simple distributed <String, String> key value store created with Spring Boot w
 4. Execute following command on all nodes specified in Step 2 with port number as mentioned.
 ```
 java -jar dkvstore.jar --server.port={port}
+```
+5. Test with following commands.
+> Get {Key}
+```
+curl -XPOST http://{hostname}:{port}/get/{key}
+```
+> Set {Key}->{Val}
+```
+curl -XPOST http://{hostname}:{port}/set/{key} -d "val={val}"
 ```
